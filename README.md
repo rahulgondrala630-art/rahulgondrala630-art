@@ -12,7 +12,7 @@ Java full-stack developer and MS Computer Science student at Concordia Universit
 ## Featured work
 
 ### Nexora Platform
-A design-driven operations workspace that makes delivery momentum, ownership, and risk visible. Private while the first review pass is in progress.
+A public design-driven operations workspace that makes delivery momentum, ownership, and risk visible.
 
 ### EventEase
 Spring Boot event management application focused on authentication, event workflows, and REST API fundamentals.
