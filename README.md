@@ -1,16 +1,16 @@
 # Rahul Gondrala
 
-Java full-stack developer and MS Computer Science student at Concordia University Wisconsin. I build responsive interfaces and maintainable APIs with Java, Spring Boot, React, JavaScript, Node.js, and SQL.
+Java full-stack developer and May 2026 master’s graduate of Concordia University Wisconsin. I build responsive interfaces and maintainable APIs with Java, Spring Boot, React, JavaScript, Node.js, and SQL.
 
 ## Featured portfolio projects
 
-These are independent portfolio demonstrations, not employer production systems. The new implementations are available on the `portfolio/responsive-projects` review branches until approved and merged.
+These are independent portfolio demonstrations, not employer production systems. Source code for the three featured projects is available on their default `main` branches.
 
-| Project | Focus | Stack | Review code |
+| Project | Focus | Stack | Source code |
 | --- | --- | --- | --- |
-| Flowboard | Workflow requests and approvals | React, Node.js, Express, PostgreSQL | [Repository](https://github.com/rahulgondrala630-art/flowboard-workflow-platform/tree/portfolio/responsive-projects) |
-| Manufacturing Operations Dashboard | Production and downtime tracking | React, JavaScript, REST APIs, PostgreSQL | [Repository](https://github.com/rahulgondrala630-art/manufacturing-operations-dashboard/tree/portfolio/responsive-projects) |
-| Flowforge | Task and sprint management | React, JavaScript, REST APIs, PostgreSQL | [Repository](https://github.com/rahulgondrala630-art/flowforge-task-management-platform/tree/portfolio/responsive-projects) |
+| Flowboard | Workflow requests and approvals | React, Node.js, Express, PostgreSQL | [Repository](https://github.com/rahulgondrala630-art/flowboard-workflow-platform/tree/main) |
+| Manufacturing Operations Dashboard | Production and downtime tracking | React, JavaScript, REST APIs, PostgreSQL | [Repository](https://github.com/rahulgondrala630-art/manufacturing-operations-dashboard/tree/main) |
+| Flowforge | Task and sprint management | React, JavaScript, REST APIs, PostgreSQL | [Repository](https://github.com/rahulgondrala630-art/flowforge-task-management-platform/tree/main) |
 
 Each project's README documents setup, implemented features, demo data, and limitations. Portfolio demos are not production deployments.
 
@@ -30,6 +30,12 @@ Each project's README documents setup, implemented features, demo data, and limi
 ## Stack
 
 `Java` `Spring Boot` `React` `JavaScript` `TypeScript` `Node.js` `Express` `REST APIs` `PostgreSQL` `MySQL` `GitHub Actions`
+
+## Education
+
+Concordia University Wisconsin — Mequon, WI  
+Master of Science in Information Technology / Computer Science — May 2026  
+GPA: 3.67
 
 ## Opportunities
 
