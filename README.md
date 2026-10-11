@@ -1,31 +1,38 @@
 # Rahul Gondrala
 
-Java full-stack developer and MS Computer Science student at Concordia University Wisconsin. I build thoughtful products with Spring Boot, React, TypeScript, PostgreSQL, and a strong bias toward clear UX and maintainable engineering.
+Java full-stack developer and MS Computer Science student at Concordia University Wisconsin. I build responsive interfaces and maintainable APIs with Java, Spring Boot, React, JavaScript, Node.js, and SQL.
 
-## What I care about
+## Featured portfolio projects
 
-- Turning complex workflows into calm, understandable interfaces
-- Building reliable APIs with explicit boundaries and useful tests
-- Shipping polished work: documentation, CI, accessibility states, and honest tradeoffs
-- Learning quickly and contributing to teams that value ownership and feedback
+These are independent portfolio demonstrations, not employer production systems. The new implementations are available on the `portfolio/responsive-projects` review branches until approved and merged.
 
-## Featured work
+| Project | Focus | Stack | Review code |
+| --- | --- | --- | --- |
+| Flowboard | Workflow requests and approvals | React, Node.js, Express, PostgreSQL | [Repository](https://github.com/rahulgondrala630-art/flowboard-workflow-platform/tree/portfolio/responsive-projects) |
+| Manufacturing Operations Dashboard | Production and downtime tracking | React, JavaScript, REST APIs, PostgreSQL | [Repository](https://github.com/rahulgondrala630-art/manufacturing-operations-dashboard/tree/portfolio/responsive-projects) |
+| Flowforge | Task and sprint management | React, JavaScript, REST APIs, PostgreSQL | [Repository](https://github.com/rahulgondrala630-art/flowforge-task-management-platform/tree/portfolio/responsive-projects) |
 
-### Nexora Platform
-A public design-driven operations workspace that makes delivery momentum, ownership, and risk visible.
+Each project's README documents setup, implemented features, demo data, and limitations. Portfolio demos are not production deployments.
 
-### EventEase
-Spring Boot event management application focused on authentication, event workflows, and REST API fundamentals.
+## More work
 
-### CampusConnect
-Java portal for student and faculty operations, CRUD workflows, search, and role-aware administration.
+- [Nexora Platform](https://github.com/rahulgondrala630-art/nexora-platform) — design-driven operations workspace; the current public demo is frontend-only.
+- [EventEase](https://github.com/rahulgondrala630-art/EventEase-Event-Management-App) — Java event management project with a foundation implementation under review.
+- [CampusConnect](https://github.com/rahulgondrala630-art/CampusConnect-Java-Portal) — Java university portal with a foundation implementation under review.
+- [Enterprise Banking System](https://github.com/rahulgondrala630-art/enterprise-banking-system) — independent banking portfolio project with foundation changes under review.
+
+## Engineering interests
+
+- Responsive, accessible interfaces with useful loading, empty, and error states
+- Clear REST API boundaries, validated inputs, and relational data models
+- Tests, reproducible setup, and honest implementation trade-offs
 
 ## Stack
 
-`Java` `Spring Boot` `React` `TypeScript` `REST APIs` `PostgreSQL` `MySQL` `Docker` `GitHub Actions`
+`Java` `Spring Boot` `React` `JavaScript` `TypeScript` `Node.js` `Express` `REST APIs` `PostgreSQL` `MySQL` `GitHub Actions`
 
-## Currently open to
+## Opportunities
 
-Software engineering internships and full-stack opportunities where I can contribute across product, frontend, and backend layers.
+Open to software engineering internships and full-stack opportunities across frontend and backend development.
 
 [LinkedIn](https://www.linkedin.com/in/rahul-gondrala-3a301b215/) · [GitHub](https://github.com/rahulgondrala630-art)
