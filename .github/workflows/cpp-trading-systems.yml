@@ -1,0 +1,21 @@
+name: C++ trading systems CI
+on:
+  push:
+    paths:
+      - "cpp-trading-systems/**"
+      - ".github/workflows/cpp-trading-systems.yml"
+  pull_request:
+    paths:
+      - "cpp-trading-systems/**"
+      - ".github/workflows/cpp-trading-systems.yml"
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S cpp-trading-systems -B cpp-trading-systems/build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build cpp-trading-systems/build --parallel
+      - name: Test
+        run: ctest --test-dir cpp-trading-systems/build --output-on-failure
