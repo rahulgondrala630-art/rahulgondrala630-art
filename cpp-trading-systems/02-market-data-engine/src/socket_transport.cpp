@@ -2,6 +2,7 @@
 #include <array>
 #include <cerrno>
 #include <sys/socket.h>
+#include <sys/uio.h>
 namespace feed {
 namespace {
 bool receive_exact(int fd, std::uint8_t* dst, std::size_t count, std::string& error) {
@@ -29,8 +30,17 @@ std::optional<std::vector<std::uint8_t>> read_tcp_frame(int fd,std::size_t max_s
 std::optional<std::vector<std::uint8_t>> read_udp_datagram(int fd,std::size_t max_size,std::string& error) {
     if(max_size==0) { error="UDP receive buffer size must be positive"; return std::nullopt; }
     std::vector<std::uint8_t> buffer(max_size);
-    const auto n=::recvfrom(fd,buffer.data(),buffer.size(),0,nullptr,nullptr);
-    if(n<0) { if(errno==EINTR) return read_udp_datagram(fd,max_size,error); error="UDP recvfrom failed"; return std::nullopt; }
+    iovec iov{buffer.data(),buffer.size()};
+    msghdr message{};
+    message.msg_iov=&iov;
+    message.msg_iovlen=1;
+    ssize_t n;
+    do { n=::recvmsg(fd,&message,MSG_TRUNC); } while(n<0 && errno==EINTR);
+    if(n<0) { error="UDP recvmsg failed"; return std::nullopt; }
+    if(static_cast<std::size_t>(n)>max_size || (message.msg_flags&MSG_TRUNC)) {
+        error="UDP datagram exceeds configured maximum";
+        return std::nullopt;
+    }
     buffer.resize(static_cast<std::size_t>(n));
     return buffer;
 }
