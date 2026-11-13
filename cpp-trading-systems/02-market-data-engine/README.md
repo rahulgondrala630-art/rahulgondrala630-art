@@ -9,7 +9,7 @@
 - Sequence validator identifying in-order, gap, and duplicate/old messages.
 - In-memory order event application with best bid and best ask accessors.
 - Bounded single-producer/single-consumer ring queue using acquire/release atomics.
-- POSIX TCP length-prefixed frame reader and UDP datagram reader; caller owns socket lifecycle.
+- POSIX TCP length-prefixed frame reader and UDP datagram reader with oversized-datagram detection; caller owns socket lifecycle.
 - CMake build, demonstration program, and dependency-free unit tests, including a TCP socket-pair test.
 
 ## Build and run
@@ -27,7 +27,7 @@ Each event contains sequence (8 bytes), event type (1), side (1), order ID (8), 
 
 ## Next engineering milestones
 
-1. Add server/client lifecycle, reconnect behavior, socket timeouts, and UDP truncation handling.
+1. Add server/client lifecycle, reconnect behavior, and configurable socket timeouts.
 2. Add gap buffering, snapshot recovery, and replay from captured feed files.
 3. Connect transport to the bounded queue and order-book processor.
 4. Add robust handling for modify/cancel/trade events, instrument identifiers, and load tests.
