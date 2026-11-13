@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <optional>
 #include <string>
+#include <unordered_map>
 #include <vector>
 namespace feed {
 enum class EventType : std::uint8_t { Add=1, Modify=2, Cancel=3, Trade=4 };
