@@ -110,8 +110,18 @@ std::vector<LevelSnapshot> OrderBook::snapshot(const BidLevels& levels,std::size
 }
 std::vector<LevelSnapshot> OrderBook::snapshot(const AskLevels& levels,std::size_t depth) {
     std::vector<LevelSnapshot> out;
-    for(const auto& [price,q]:levels) { if(out.size()==depth) break; std::uint64_t total=0;
-        for(const auto& o:q) total+=o.quantity; out.push_back({price,total,q.size()}); }
+    for(const auto& [price,q]:levels) {
+        if(out.size()==depth) break;
+        std::uint64_t total=0;
+        for(const auto& o:q) {
+            if(o.quantity>std::numeric_limits<std::uint64_t>::max()-total) {
+                total=std::numeric_limits<std::uint64_t>::max();
+                break;
+            }
+            total+=o.quantity;
+        }
+        out.push_back({price,total,q.size()});
+    }
     return out;
 }
 std::vector<LevelSnapshot> OrderBook::bids(std::size_t depth) const { std::lock_guard lock(mutex_); return snapshot(bids_,depth); }
