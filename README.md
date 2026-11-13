@@ -42,3 +42,9 @@ GPA: 3.67
 Open to software engineering internships and full-stack opportunities across frontend and backend development.
 
 [LinkedIn](https://www.linkedin.com/in/rahul-gondrala-3a301b215/) · [GitHub](https://github.com/rahulgondrala630-art)
+
+## C++ Trading Systems
+
+Building a C++20 trading-systems portfolio covering an order matching engine, real-time market-data processing, and smart order execution. The projects include working initial implementations, CMake builds, and tests; remaining features and benchmark work are documented transparently.
+
+- [C++ Trading Systems Portfolio](cpp-trading-systems/README.md)
