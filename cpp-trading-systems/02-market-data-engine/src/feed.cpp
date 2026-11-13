@@ -33,9 +33,16 @@ std::optional<Event> decode(const std::vector<std::uint8_t>& b, std::string& err
     return e;
 }
 SequenceStatus Sequencer::accept(std::uint64_t s) {
-    if(s<expected_) return SequenceStatus::DuplicateOrOld;
-    if(s>expected_) { expected_=s+1; return SequenceStatus::Gap; }
-    ++expected_; return SequenceStatus::InOrder;
+    if(exhausted_ || s<expected_) return SequenceStatus::DuplicateOrOld;
+    if(s>expected_) {
+        expected_=s;
+        if(s==std::numeric_limits<std::uint64_t>::max()) exhausted_=true;
+        else ++expected_;
+        return SequenceStatus::Gap;
+    }
+    if(expected_==std::numeric_limits<std::uint64_t>::max()) exhausted_=true;
+    else ++expected_;
+    return SequenceStatus::InOrder;
 }
 void TopOfBook::apply(const Event& e) {
     if(e.type==EventType::Add) orders_[e.order_id]={e.is_buy,e.price_ticks,e.quantity};
