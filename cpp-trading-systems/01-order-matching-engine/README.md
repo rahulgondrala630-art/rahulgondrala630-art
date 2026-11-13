@@ -1,15 +1,17 @@
 # High-Performance Order Matching Engine
 
-**Status:** Working initial C++20 implementation committed. Further optimization and expanded order policies remain planned.
+**Status:** Working C++20 matching core with price-time priority, indexed cancellation, IOC/FOK policies, tests, and CMake build. Performance tuning and benchmark measurement remain planned.
 
 ## Implemented
 
-- Price-time priority matching for limit and market orders.
-- Bid and ask price levels with FIFO queues at each price.
-- Partial fills and trade records at the resting maker price.
-- Active order ID validation, cancellation, and market-depth snapshots.
+- Price-time priority: best price first, FIFO at each price level.
+- Limit and market orders with full and partial fills.
+- Good-till-cancelled, immediate-or-cancel, and fill-or-kill time-in-force.
+- FOK preflight liquidity check; an unfillable FOK is rejected without changing the book.
+- O(1)-average active-order lookup and iterator-indexed cancellation.
+- Integer price ticks, trade records, and depth snapshots.
 - Mutex-protected public operations for safe concurrent callers.
-- CMake build, runnable demonstration, and dependency-free unit tests.
+- Dependency-free tests for FIFO matching, partial fills, cancellation, IOC, and FOK.
 
 ## Build and run
 
@@ -20,13 +22,8 @@ ctest --test-dir build --output-on-failure
 ./build/matching_demo
 ```
 
-Prices are represented as integer ticks to avoid floating-point comparison errors. This first version favors clarity and deterministic behavior; cancellation currently scans price-level queues and should be replaced with an iterator index before making latency claims.
+## Design notes and limitations
 
-## Next engineering milestones
+Each price level stores a FIFO list. An unordered index maps active order IDs to their price level and list iterator, avoiding a full-book scan for cancellation. The FOK check scans eligible resting liquidity before execution; it favors correctness and is not yet optimized. Market orders are treated as immediate-or-cancel to prevent unpriced residual liquidity from resting.
 
-1. Add replace, IOC, and FOK order semantics with explicit lifecycle states.
-2. Add iterator-based cancellation and allocation-aware order storage.
-3. Add randomized/property tests, replay fixtures, and race testing.
-4. Add a reproducible latency/throughput benchmark before publishing performance figures.
-
-This is a single-instrument educational exchange simulator, not a production exchange or live trading system.
+The engine is single-instrument and in-memory. Replace/amend operations, randomized property testing, persistence, and latency benchmarks are future work. No measured performance claims are published yet.
