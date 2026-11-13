@@ -1,6 +1,7 @@
 #include "order_book.hpp"
 #include <algorithm>
 #include <limits>
+#include <iterator>
 #include <utility>
 namespace matching {
 bool OrderBook::crosses(const Order& o) const {
@@ -43,7 +44,6 @@ SubmitResult OrderBook::submit(Order incoming) {
         result.reason="fill-or-kill order cannot be filled completely";
         return result;
     }
-    const auto original_id=incoming.id;
     while(incoming.quantity>0 && crosses(incoming)) {
         if(incoming.side==Side::Buy) {
             auto level=asks_.begin(); auto& maker=level->second.front();
@@ -59,11 +59,10 @@ SubmitResult OrderBook::submit(Order incoming) {
             if(maker.quantity==0) erase_front(Side::Buy,level->first);
         }
     }
+    result.remaining_quantity=incoming.quantity;
     if(incoming.quantity>0 && incoming.type==OrderType::Limit &&
        incoming.time_in_force==TimeInForce::GoodTillCancelled) rest(std::move(incoming));
     result.accepted=true;
-    result.remaining_quantity=incoming.quantity;
-    (void)original_id;
     return result;
 }
 void OrderBook::rest(Order order) {
@@ -100,7 +99,13 @@ bool OrderBook::cancel(const std::string& id) {
 std::vector<LevelSnapshot> OrderBook::snapshot(const BidLevels& levels,std::size_t depth) {
     std::vector<LevelSnapshot> out;
     for(const auto& [price,q]:levels) { if(out.size()==depth) break; std::uint64_t total=0;
-        for(const auto& o:q) total+=o.quantity; out.push_back({price,total,q.size()}); }
+        for(const auto& o:q) {
+            if(o.quantity>std::numeric_limits<std::uint64_t>::max()-total) {
+                total=std::numeric_limits<std::uint64_t>::max(); break;
+            }
+            total+=o.quantity;
+        }
+        out.push_back({price,total,q.size()}); }
     return out;
 }
 std::vector<LevelSnapshot> OrderBook::snapshot(const AskLevels& levels,std::size_t depth) {
