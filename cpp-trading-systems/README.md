@@ -4,13 +4,13 @@ Three independent C++20 portfolio projects focused on core electronic-trading en
 
 ## Current implementation status
 
-| Project | Implemented baseline | Remaining major work |
+| Project | Implemented now | Remaining major work |
 | --- | --- | --- |
-| [High-Performance Order Matching Engine](01-order-matching-engine/README.md) | Price-time matching, partial fills, cancellation, depth snapshots, tests | Iterator-indexed cancellation, order policies, benchmarks |
-| [Real-Time Market Data Engine](02-market-data-engine/README.md) | Binary codec, validation, sequencing, basic book demo, tests | TCP/UDP sockets, side-aware protocol, recovery, concurrent pipeline |
-| [Smart Order Execution Simulator](03-smart-order-execution/README.md) | TWAP/VWAP schedules, risk checks, venue selection, analytics, tests | Parent/child state machine, event-driven backtester, persistence |
+| [High-Performance Order Matching Engine](01-order-matching-engine/README.md) | Price-time priority, limit/market orders, partial fills, GTC/IOC/FOK, indexed cancellation, depth snapshots, tests | Replace/amend operations, property tests, benchmarks |
+| [Real-Time Market Data Engine](02-market-data-engine/README.md) | Binary codec, sequence validation, side-aware top of book, SPSC queue, POSIX TCP/UDP readers, tests | Recovery/replay, end-to-end pipeline, reconnect handling, benchmarks |
+| [Smart Order Execution Simulator](03-smart-order-execution/README.md) | TWAP/VWAP, pre-trade risk, venue selection, simulated partial fills, parent-order lifecycle, execution analytics, tests | Event-driven backtester, multi-venue splitting, sell-side routing, persistence |
 
-These are portfolio implementations under active development. Features listed as remaining work are not yet implemented. No benchmark results or production-performance claims are published until measured.
+Features listed as remaining work are not yet implemented. No benchmark results or production-performance claims are published until measured.
 
 ## Build all projects
 
@@ -22,7 +22,7 @@ cmake --build build -j
 ctest --test-dir build --output-on-failure
 ```
 
-Requires CMake 3.20+ and a C++20 compiler (GCC 10+, Clang 12+, or equivalent).
+Requires CMake 3.20+ and a C++20 compiler. The GitHub Actions workflow at `.github/workflows/cpp-trading-systems.yml` is configured to build and run tests on pushes and pull requests touching this portfolio.
 
 ## Engineering principles
 
