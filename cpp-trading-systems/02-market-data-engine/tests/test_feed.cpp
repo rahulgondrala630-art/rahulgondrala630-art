@@ -12,5 +12,8 @@ int main() {
     TopOfBook b; b.apply(e); assert(b.best_bid() && b.best_bid()->quantity==20);
     b.apply({2,EventType::Add,8,10110,15,false});
     assert(b.best_ask() && b.best_ask()->price_ticks==10110);
-    b.apply({3,EventType::Cancel,7,10100,20,true}); assert(!b.best_bid());
+    b.apply({3,EventType::Modify,8,10090,12,true});
+    assert(b.best_bid() && b.best_bid()->price_ticks==10090);
+    assert(!b.best_ask());
+    b.apply({4,EventType::Cancel,7,10100,20,true}); assert(!b.best_bid());
 }
