@@ -1,5 +1,6 @@
 #include "feed.hpp"
 #include <algorithm>
+#include <limits>
 namespace feed {
 namespace {
 void put(std::vector<std::uint8_t>& b, std::uint64_t v, int n) {
@@ -24,6 +25,9 @@ std::optional<Event> decode(const std::vector<std::uint8_t>& b, std::string& err
         error="truncated message"; return std::nullopt;
     }
     if(type<1||type>4||side>1) { error="unknown event type or side"; return std::nullopt; }
+    if(price>static_cast<std::uint64_t>(std::numeric_limits<std::int64_t>::max())) {
+        error="price is outside the supported signed tick range"; return std::nullopt;
+    }
     Event e{seq,static_cast<EventType>(type),id,static_cast<std::int64_t>(price),qty,side==1};
     if(e.order_id==0 || e.price_ticks<=0 || e.quantity==0) { error="invalid event fields"; return std::nullopt; }
     return e;
@@ -37,7 +41,7 @@ void TopOfBook::apply(const Event& e) {
     if(e.type==EventType::Add) orders_[e.order_id]={e.is_buy,e.price_ticks,e.quantity};
     else if(e.type==EventType::Modify) {
         auto it=orders_.find(e.order_id);
-        if(it!=orders_.end()) { it->second.price=e.price_ticks; it->second.quantity=e.quantity; }
+        if(it!=orders_.end()) { it->second.buy=e.is_buy; it->second.price=e.price_ticks; it->second.quantity=e.quantity; }
     } else if(e.type==EventType::Cancel) orders_.erase(e.order_id);
     else if(e.type==EventType::Trade) {
         auto it=orders_.find(e.order_id);
