@@ -6,7 +6,14 @@
 #include <vector>
 namespace feed {
 enum class EventType : std::uint8_t { Add=1, Modify=2, Cancel=3, Trade=4 };
-struct Event { std::uint64_t sequence{}; EventType type{}; std::uint64_t order_id{}; std::int64_t price_ticks{}; std::uint64_t quantity{}; };
+struct Event {
+    std::uint64_t sequence{};
+    EventType type{};
+    std::uint64_t order_id{};
+    std::int64_t price_ticks{};
+    std::uint64_t quantity{};
+    bool is_buy{true};
+};
 std::vector<std::uint8_t> encode(const Event& event);
 std::optional<Event> decode(const std::vector<std::uint8_t>& bytes, std::string& error);
 enum class SequenceStatus { InOrder, Gap, DuplicateOrOld };
