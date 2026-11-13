@@ -21,7 +21,9 @@ class Sequencer {
 public:
     SequenceStatus accept(std::uint64_t sequence);
     std::uint64_t expected() const { return expected_; }
-private: std::uint64_t expected_{1};
+private:
+    std::uint64_t expected_{1};
+    bool exhausted_{false};
 };
 struct BookLevel { std::int64_t price_ticks{}; std::uint64_t quantity{}; };
 class TopOfBook {
