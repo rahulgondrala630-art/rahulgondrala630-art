@@ -10,9 +10,9 @@ int main() {
     assert(s.trades[0].maker_order_id=="b1" && s.trades[0].quantity==10);
     assert(s.trades[1].maker_order_id=="b2" && s.trades[1].quantity==2);
     assert(book.order_count()==1);
-    assert(book.cancel("b2")==false);
-    assert(book.cancel("s1"));
-    assert(!book.cancel("missing"));
+    assert(book.cancel("b2"));
+    assert(!book.cancel("b2"));
+    assert(book.order_count()==0);
     auto market = book.submit({"m1",Side::Sell,OrderType::Market,0,1});
     assert(market.accepted && market.trades.empty());
     assert(book.order_count()==0);
